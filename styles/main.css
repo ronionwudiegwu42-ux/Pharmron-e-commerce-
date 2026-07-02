@@ -1,0 +1,262 @@
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    background-color: #1a1a1a;
+    padding: 20px 0;
+    border-bottom: 1px solid #333;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #d4af37;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+nav ul li a:hover {
+    color: #d4af37;
+}
+
+/* Founder's Welcome Section */
+.founders-welcome {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 40px 0;
+    border-bottom: 1px solid #333;
+}
+
+.founders-image img {
+    width: 200px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.founders-content h2 {
+    font-size: 2rem;
+    margin: 0 0 15px 0;
+    color: #d4af37;
+}
+
+.founders-subheadline {
+    color: #cccccc;
+    margin-bottom: 20px;
+}
+
+.founders-cta {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.button {
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.founders-primary {
+    background-color: #d4af37;
+    color: #000000;
+}
+
+.founders-primary:hover {
+    background-color: #b8952f;
+}
+
+.founders-secondary {
+    background-color: transparent;
+    color: #d4af37;
+    border: 1px solid #d4af37;
+}
+
+.founders-secondary:hover {
+    background-color: #d4af37;
+    color: #000000;
+}
+
+.trust-strip {
+    display: flex;
+    gap: 20px;
+    color: #cccccc;
+}
+
+.trust-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Product Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 40px 0;
+}
+
+.product-card {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+}
+
+.product-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.product-card h3 {
+    margin: 15px 0;
+    font-size: 1.2rem;
+    color: #d4af37;
+}
+
+.product-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.product-actions .button {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+}
+
+.signature-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #d4af37;
+    color: #000000;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.partner-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #808080;
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* Footer */
+footer {
+    background-color: #1a1a1a;
+    padding: 40px 0 20px;
+    border-top: 1px solid #333;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 10px;
+}
+
+.footer-links ul li a {
+    color: #cccccc;
+    text-decoration: none;
+}
+
+.footer-links ul li a:hover {
+    color: #d4af37;
+}
+
+.newsletter form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.newsletter input {
+    padding: 10px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.newsletter button {
+    padding: 10px;
+    background-color: #d4af37;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.newsletter button:hover {
+    background-color: #b8952f;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .founders-welcome {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .founders-image img {
+        width: 150px;
+    }
+
+    .founders-cta {
+        justify-content: center;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

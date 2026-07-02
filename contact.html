@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Pharmron Natriceuticals</title>
+    <meta name="description" content="Get in touch with Pharmron Natriceuticals. Reach us via email, WhatsApp, or our contact form for product inquiries, order support, and partnership opportunities.">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Pharmron Natriceuticals</h1>
+            <p>Your partner in health and wellness.</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#products">Products</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="legal/terms-of-service.html">Terms of Service</a></li>
+                <li><a href="legal/privacy-policy.html">Privacy Policy</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <style>
+            .contact-hero {
+                text-align: center;
+                padding: 3rem 1rem;
+                border-bottom: 1px solid var(--accent-color);
+                margin-bottom: 2rem;
+            }
+            .contact-hero h2 {
+                font-size: 2.2rem;
+                color: var(--accent-color);
+                margin-bottom: 0.5rem;
+            }
+            .contact-hero .tagline {
+                color: var(--gold-light);
+                font-size: 1.1rem;
+            }
+            .contact-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+                margin-bottom: 3rem;
+            }
+            .contact-info-card {
+                background: var(--card-bg);
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+                padding: 2rem;
+                transition: border-color 0.3s ease;
+            }
+            .contact-info-card:hover {
+                border-color: var(--accent-color);
+            }
+            .contact-info-card .icon {
+                font-size: 2.5rem;
+                margin-bottom: 0.8rem;
+                display: block;
+            }
+            .contact-info-card h3 {
+                color: var(--accent-color);
+                font-size: 1.2rem;
+                margin-bottom: 0.8rem;
+            }
+            .contact-info-card p {
+                color: var(--text-light);
+                font-size: 0.95rem;
+                margin-bottom: 0.5rem;
+                line-height: 1.7;
+            }
+            .contact-info-card a {
+                color: var(--gold-light);
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 1.05rem;
+                transition: color 0.3s ease;
+            }
+            .contact-info-card a:hover {
+                color: var(--accent-color);
+            }
+            .contact-method {
+                margin-bottom: 1.5rem;
+                padding-bottom: 1.5rem;
+                border-bottom: 1px solid var(--border-color);
+            }
+            .contact-method:last-child {
+                border-bottom: none;
+                margin-bottom: 0;
+                padding-bottom: 0;
+            }
+            .contact-form-section {
+                background: var(--card-bg);
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+                padding: 2rem;
+            }
+            .contact-form-section h3 {
+                color: var(--accent-color);
+                font-size: 1.2rem;
+                margin-bottom: 1.5rem;
+            }
+            .form-group {
+                margin-bottom: 1.2rem;
+            }
+            .form-group label {
+                display: block;
+                color: var(--gold-light);
+                margin-bottom: 0.4rem;
+                font-weight: 600;
+                font-size: 0.9rem;
+            }
+            .form-group input,
+            .form-group textarea,
+            .form-group select {
+                width: 100%;
+                padding: 0.7rem;
+                background-color: var(--secondary-color);
+                border: 1px solid var(--border-color);
+                border-radius: 4px;
+                color: var(--text-color);
+                font-size: 0.95rem;
+                font-family: inherit;
+                transition: border-color 0.3s ease;
+            }
+            .form-group input:focus,
+            .form-group textarea:focus,
+            .form-group select:focus {
+                outline: none;
+                border-color: var(--accent-color);
+            }
+            .form-group textarea {
+                min-height: 120px;
+                resize: vertical;
+            }
+            .form-group input::placeholder,
+            .form-group textarea::placeholder {
+                color: var(--text-light);
+            }
+            .form-group select option {
+                background-color: var(--secondary-color);
+                color: var(--text-color);
+            }
+            .submit-button {
+                width: 100%;
+                padding: 0.8rem;
+                background-color: var(--accent-color);
+                color: #000000;
+                border: none;
+                border-radius: 4px;
+                font-size: 1rem;
+                font-weight: 700;
+                cursor: pointer;
+                transition: background-color 0.3s ease, transform 0.2s ease;
+            }
+            .submit-button:hover {
+                background-color: var(--accent-hover);
+                transform: translateY(-2px);
+            }
+            .faq-section {
+                margin-top: 3rem;
+                margin-bottom: 3rem;
+            }
+            .faq-section h3 {
+                color: var(--accent-color);
+                font-size: 1.5rem;
+                text-align: center;
+                margin-bottom: 1.5rem;
+            }
+            .faq-item {
+                background: var(--card-bg);
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+                margin-bottom: 0.8rem;
+                overflow: hidden;
+            }
+            .faq-question {
+                padding: 1rem 1.5rem;
+                cursor: pointer;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                color: var(--gold-light);
+                font-weight: 600;
+                font-size: 0.95rem;
+                transition: background-color 0.3s ease;
+            }
+            .faq-question:hover {
+                background-color: var(--secondary-color);
+            }
+            .faq-question .arrow {
+                font-size: 1.2rem;
+                transition: transform 0.3s ease;
+                color: var(--accent-color);
+            }
+            .faq-item.open .faq-question .arrow {
+                transform: rotate(180deg);
+            }
+            .faq-answer {
+                padding: 0 1.5rem 1rem 1.5rem;
+                display: none;
+                color: var(--text-light);
+                font-size: 0.9rem;
+                line-height: 1.7;
+            }
+            .faq-item.open .faq-answer {
+                display: block;
+            }
+            @media (max-width: 768px) {
+                .contact-grid {
+                    grid-template-columns: 1fr;
+                }
+                .contact-hero h2 {
+                    font-size: 1.6rem;
+                }
+            }
+        </style>
+
+        <div class="contact-hero">
+            <h2>Contact Us</h2>
+            <p class="tagline">We're here to help. Reach out anytime — we'd love to hear from you.</p>
+        </div>
+
+        <div class="contact-grid">
+            <!-- Contact Information -->
+            <div class="contact-info-card">
+                <h3>Get In Touch</h3>
+
+                <div class="contact-method">
+                    <span class="icon">📧</span>
+                    <h3>Email Us</h3>
+                    <p>For general inquiries, order support, or partnership opportunities:</p>
+                    <a href="mailto:support@pharmron.com.ng">support@pharmron.com.ng</a>
+                    <p style="margin-top: 0.5rem; font-size: 0.85rem;">
+                        We typically respond within 24 hours during business days.
+                    </p>
+                </div>
+
+                <div class="contact-method">
+                    <span class="icon">💬</span>
+                    <h3>Chat on WhatsApp</h3>
+                    <p>Prefer instant messaging? Reach us directly on WhatsApp:</p>
+                    <a href="https://wa.me/2348037341221" target="_blank">+234 803 734 1221</a>
+                    <p style="margin-top: 0.5rem; font-size: 0.85rem;">
+                        Available Monday – Saturday, 9 AM – 6 PM (WAT).
+                    </p>
+                </div>
+
+                <div class="contact-method">
+                    <span class="icon">🕐</span>
+                    <h3>Business Hours</h3>
+                    <p><strong style="color: var(--gold-light);">Monday – Friday:</strong> 9:00 AM – 6:00 PM (WAT)</p>
+                    <p><strong style="color: var(--gold-light);">Saturday:</strong> 10:00 AM – 4:00 PM (WAT)</p>
+                    <p><strong style="color: var(--gold-light);">Sunday:</strong> Closed</p>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form-section">
+                <h3>Send Us a Message</h3>
+                <form id="contact-form" onsubmit="handleFormSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" placeholder="Enter your email address" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number (Optional)</label>
+                        <input type="tel" id="phone" placeholder="Enter your phone number">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <select id="subject" required>
+                            <option value="">Select a topic</option>
+                            <option value="order">Order Inquiry</option>
+                            <option value="product">Product Question</option>
+                            <option value="return">Return / Refund</option>
+                            <option value="partnership">Partnership Opportunity</option>
+                            <option value="feedback">General Feedback</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Your Message *</label>
+                        <textarea id="message" placeholder="Tell us how we can help you..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-button">Send Message</button>
+                </form>
+                <div id="form-success" style="display: none; text-align: center; padding: 1rem; color: var(--accent-color); font-weight: 600; margin-top: 1rem;">
+                    ✅ Thank you! Your message has been sent. We'll get back to you soon.
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h3>Frequently Asked Questions</h3>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    How long does delivery take?
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Delivery times vary by product and location. Signature products typically ship within 1–2 business days. Partner products may take 3–5 business days depending on the fulfillment partner. You'll receive tracking information once your order is processed.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    What is your return policy?
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Signature Products can be returned within 14 days of delivery, provided the product is unused and in its original packaging. Partner Products follow the manufacturer's return policy — we facilitate the process on your behalf. See our <a href="legal/terms-of-service.html" style="color: var(--accent-color);">Terms of Service</a> for full details.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    Are your products GTIN-verified?
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Absolutely. Every product listed on Pharmron — whether Signature or Partner — carries a verified Global Trade Item Number (GTIN). This ensures authenticity, traceability, and compliance with Google Shopping standards.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    How do I become a verified partner?
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    We're always looking for quality brands to join our Community Favorites. Send us an email at support@pharmron.com.ng with the subject "Partnership Opportunity" and tell us about your products. Our team will review your submission and get back to you within 3–5 business days.
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function toggleFAQ(element) {
+                const faqItem = element.parentElement;
+                faqItem.classList.toggle('open');
+            }
+
+            function handleFormSubmit(event) {
+                event.preventDefault();
+                const form = document.getElementById('contact-form');
+                const successMessage = document.getElementById('form-success');
+                
+                // In a production site, this would POST to a backend endpoint
+                // For now, show success message
+                form.style.display = 'none';
+                successMessage.style.display = 'block';
+            }
+        </script>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Pharmron Natriceuticals</h3>
+                <p>Your partner in health and wellness.</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="index.html#products">Products</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+                <a href="legal/terms-of-service.html">Terms of Service</a>
+                <a href="legal/privacy-policy.html">Privacy Policy</a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter for updates and offers.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your Email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <p>&copy; 2024 Pharmron Natriceuticals. All rights reserved.</p>
+    </footer>
+</body>
+</html>

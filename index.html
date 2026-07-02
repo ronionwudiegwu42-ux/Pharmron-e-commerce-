@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmron Natriceuticals - Health and Wellness</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Pharmron Natriceuticals</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="/about.html">About Us</a></li>
+                    <li><a href="/contact.html">Contact</a></li>
+                    <li><a href="/terms.html">Terms of Service</a></li>
+                    <li><a href="/privacy.html">Privacy Policy</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="container">
+        <!-- Founder's Welcome Section -->
+        <section class="founders-welcome">
+            <div class="founders-image">
+                <img src="/images/founder.png" alt="Founder of Pharmron Natriceuticals">
+            </div>
+            <div class="founders-content">
+                <h2>Quality Health & Wellness, Personally Verified.</h2>
+                <p class="founders-subheadline">
+                    I'm the founder of Pharmron. I started this store because I believe you deserve
+                    products that work, without the guesswork. Every item in our catalog — from my
+                    signature Rsplus line to our partner essentials — is personally reviewed,
+                    GTIN-verified, and vetted for real-world results.
+                </p>
+                <div class="founders-cta">
+                    <a href="#products" class="button founders-primary">View Signature Collection</a>
+                    <a href="https://wa.me/2348037341221" class="button founders-secondary" target="_blank">Chat with an Expert</a>
+                </div>
+                <div class="trust-strip">
+                    <span class="trust-item">🛡️ GTIN-Verified</span>
+                    <span class="trust-item">🚀 Fast Delivery</span>
+                    <span class="trust-item">💯 Quality Guaranteed</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Product Categories -->
+        <div class="product-categories">
+            <button class="button" onclick="filterProducts('all')">All</button>
+            <button class="button" onclick="filterProducts('signature')">Signature Products</button>
+            <button class="button" onclick="filterProducts('community')">Community Favorites</button>
+        </div>
+        
+        <!-- Product Grid -->
+        <div class="product-grid" id="products">
+            <!-- Products will be loaded dynamically by main.js -->
+        </div>
+    </main>
+    
+    <footer>
+        <div class="footer-content container">
+            <div>
+                <h3>Pharmron Natriceuticals</h3>
+                <p>Your trusted source for health and wellness products.</p>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="/about.html">About Us</a></li>
+                    <li><a href="/contact.html">Contact</a></li>
+                    <li><a href="/terms.html">Terms of Service</a></li>
+                    <li><a href="/privacy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="newsletter">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter for updates.</p>
+                <form>
+                    <input type="email" placeholder="Your Email" required>
+                    <button type="submit" class="button">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="/scripts/main.js"></script>
+</body>
+</html>
