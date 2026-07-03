@@ -3,144 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service - Pharmron Nutraceuticals</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <title>Terms of Service — Pharmron Natriceuticals</title>
+    <meta name="description" content="Pharmron Natriceuticals Terms of Service.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: { 50: '#fdf8e8', 100: '#f9edc5', 200: '#f3db8a', 300: '#edc94f', 400: '#e0b832', 500: '#d4af37', 600: '#b8962a', 700: '#96741f', 800: '#755a18', 900: '#5c4713' },
+                        'gold': '#d4af37', 'gold-light': '#f3db8a', 'gold-dark': '#96741f',
+                        obsidian: { 50: '#f5f5f5', 100: '#e6e6e6', 200: '#cccccc', 300: '#a3a3a3', 400: '#808080', 500: '#666666', 600: '#4d4d4d', 700: '#333333', 800: '#1a1a1a', 900: '#0d0d0d', 950: '#050505' }
+                    },
+                    fontFamily: { sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
 </head>
-<body>
-    <header>
-        <div class="container">
-            <h1>Pharmron Nutraceuticals</h1>
-            <p>Your partner in health and wellness.</p>
+<body class="bg-obsidian-950 text-obsidian-100 antialiased">
+
+    <header class="sticky top-0 z-50 border-b border-gold/20 bg-obsidian-950/95 backdrop-blur-sm">
+        <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+            <a href="/" class="flex items-center gap-4">
+                <img src="../images/pharmronlogo.png" alt="Pharmron" class="h-14 w-auto sm:h-16">
+                <div class="hidden sm:block">
+                    <span class="text-2xl font-extrabold tracking-tight text-gold">Pharmron</span>
+                    <span class="block text-xs font-medium uppercase tracking-[0.15em] text-obsidian-400">Natriceuticals</span>
+                </div>
+            </a>
+            <nav>
+                <ul class="flex items-center gap-5 text-sm font-semibold text-obsidian-300 sm:gap-8">
+                    <li><a href="/" class="transition hover:text-gold">Home</a></li>
+                    <li><a href="/#products" class="transition hover:text-gold">Products</a></li>
+                    <li><a href="../cart.html" class="transition hover:text-gold">Cart</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <nav>
-        <div class="container">
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="#">Products</a></li>
-                <li><a href="../about.html">About Us</a></li>
-                <li><a href="../contact.html">Contact</a></li>
-            </ul>
+    <main class="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+        <h1 class="text-3xl font-black text-white sm:text-4xl">Terms of Service</h1>
+        <p class="mt-2 text-sm text-obsidian-500">Last updated: July 2, 2026</p>
+
+        <div class="mt-10 space-y-8 text-sm leading-relaxed text-obsidian-300">
+            <section>
+                <h2 class="mb-3 text-lg font-bold text-white">1. Acceptance of Terms</h2>
+                <p>By accessing and using the Pharmron Natriceuticals website, you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you may not use our services.</p>
+            </section>
+
+            <section>
+                <h2 class="mb-3 text-lg font-bold text-white">2. Products & Pricing</h2>
+                <ul class="list-disc pl-5 space-y-1.5">
+                    <li>All product prices are listed in Nigerian Naira (₦) and are subject to change without notice.</li>
+                    <li>We reserve the right to modify or discontinue any product at any time.</li>
+                    <li>Product images are for illustration purposes; actual products may vary slightly.</li>
+                    <li>All products are GTIN-verified and tested for quality assurance.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="mb-3 text-lg font-bold text-white">3. Orders & Payment</h2>
+                <ul class="list-disc pl-5 space-y-1.5">
+                    <li>Orders are processed through Paystack, a PCI-DSS compliant payment gateway.</li>
+                    <li>By placing an order, you represent that the payment information provided is accurate and complete.</li>
+                    <li>We reserve the right to refuse or cancel any order for any reason, including but not limited to product availability, pricing errors, or suspected fraud.</li>
+                    <li>Order confirmation will be sent via WhatsApp or email after successful payment.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="mb-3 text-lg font-bold text-white">4. Shipping & Delivery</h2>
+                <ul class="list-disc pl-5 space-y-1.5">
+                    <li>Shipping costs and delivery timelines are communicated at checkout and may vary based on location.</li>
+                    <li>We are not responsible for delays caused by third-party courier services or customs clearance.</li>
+                    <li>Risk of loss passes to you upon delivery to the provided shipping address.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="mb-3 text-lg font-bold text-white">5. Returns & Refunds</h2>
+                <ul class="list-disc pl-5 space-y-1.5">
+                    <li>Due to the nature of health and wellness products, we accept returns only for defective or incorrectly shipped items.</li>
+                    <li>Refund requests must be submitted within 7 days of delivery via WhatsApp.</li>
+                    <li>Refunds will be processed within 5-10 business days after inspection and approval.</li>
+                    <li>Shipping costs are non-refundable unless the error is on our part.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="mb-3 text-lg font-bold text-white">6. User Conduct</h2>
+                <p>You agree not to:</p>
+                <ul class="mt-2 list-disc pl-5 space-y-1.5">
+                    <li>Use the site for any unlawful purpose or in violation of any applicable laws.</li>
+                    <li>Attempt to gain unauthorized access to any part of the website or its systems.</li>
+                    <li>Interfere with the proper functioning of the website.</li>
+                    <li>Submit false or misleading information.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="mb-3 text-lg font-bold text-white">7. Intellectual Property</h2>
+                <p>All content on this website, including text, images, logos, and product descriptions, is the property of Pharmron Natriceuticals and is protected by applicable intellectual property laws. You may not reproduce, distribute, or create derivative works without our express written consent.</p>
+            </section>
+
+            <section>
+                <h2 class="mb-3 text-lg font-bold text-white">8. Limitation of Liability</h2>
+                <p>Pharmron Natriceuticals shall not be liable for any indirect, incidental, special, or consequential damages arising from the use or inability to use our products or website. Our total liability shall not exceed the amount paid for the product in question.</p>
+            </section>
+
+            <section>
+                <h2 class="mb-3 text-lg font-bold text-white">9. Health Disclaimer</h2>
+                <p>Our products are dietary supplements and skincare items. They are not intended to diagnose, treat, cure, or prevent any disease. Always consult with a qualified healthcare professional before starting any new supplement regimen. Individual results may vary.</p>
+            </section>
+
+            <section>
+                <h2 class="mb-3 text-lg font-bold text-white">10. Changes to Terms</h2>
+                <p>We reserve the right to update these Terms of Service at any time. Changes will be effective immediately upon posting. Continued use of the site after changes constitutes acceptance of the new terms.</p>
+            </section>
+
+            <section>
+                <h2 class="mb-3 text-lg font-bold text-white">11. Governing Law</h2>
+                <p>These terms shall be governed by and construed in accordance with the laws of the Federal Republic of Nigeria.</p>
+            </section>
+
+            <section>
+                <h2 class="mb-3 text-lg font-bold text-white">12. Contact</h2>
+                <p>For questions about these terms, please contact us:</p>
+                <ul class="mt-2 list-disc pl-5 space-y-1.5">
+                    <li>WhatsApp: <a href="https://wa.me/2348037341221" class="text-gold underline hover:text-gold-light">+234 803 734 1221</a></li>
+                    <li>Website: <a href="/contact.html" class="text-gold underline hover:text-gold-light">Contact Page</a></li>
+                </ul>
+            </section>
         </div>
-    </nav>
 
-    <main class="container">
-        <h2>Terms of Service</h2>
-        <p><strong>Last Updated:</strong> July 2026</p>
-
-        <section>
-            <h3>1. Introduction</h3>
-            <p>Welcome to <strong>Pharmron.com.ng</strong> ("Pharmron," "we," "us," or "our"). By accessing or using our website, you agree to comply with and be bound by these <strong>Terms of Service</strong> ("Terms"). If you do not agree with these Terms, please do not use our website.</p>
-        </section>
-
-        <section>
-            <h3>2. Role Definition</h3>
-            <p>Pharmron acts as a <strong>curator and retailer</strong> of health and wellness products. We manage the platform, ensure quality control, and verify <strong>Global Trade Item Numbers (GTINs)</strong> for all products listed. Our marketplace features:</p>
-            <ul>
-                <li><strong>Signature Products:</strong> Designed, manufactured, and fulfilled directly by Pharmron.</li>
-                <li><strong>Partner Products:</strong> Curated from verified brand partners and fulfilled either by Pharmron or the partner, as specified at checkout.</li>
-            </ul>
-        </section>
-
-        <section>
-            <h3>3. Fulfillment Transparency</h3>
-            <p>While Pharmron provides a unified platform for browsing and purchasing products, orders may be fulfilled by different partners. By placing an order, you acknowledge and agree that:</p>
-            <ul>
-                <li>Pharmron manages the <strong>platform, payment process, and customer support</strong> to ensure a secure and seamless experience.</li>
-                <li>Certain items, particularly <strong>Partner Products</strong>, may ship directly from our <strong>verified brand partners</strong>. Pharmron remains responsible for ensuring product quality and customer satisfaction.</li>
-            </ul>
-        </section>
-
-        <section>
-            <h3>4. Payment & Security</h3>
-            <ul>
-                <li>All payments on Pharmron.com.ng are processed securely via <strong>Paystack</strong>, a leading payment gateway.</li>
-                <li>By completing a purchase, you agree to our <strong>payment terms</strong>, including but not limited to:
-                    <ul>
-                        <li>Authorization of charges to your selected payment method.</li>
-                        <li>Compliance with Paystack’s terms and conditions.</li>
-                        <li>Payment of all applicable taxes, shipping fees, and additional charges.</li>
-                    </ul>
-                </li>
-            </ul>
-        </section>
-
-        <section>
-            <h3>5. Liability & Returns</h3>
-            <p>Pharmron is committed to ensuring your satisfaction with every purchase. Our return policy is as follows:</p>
-            <ul>
-                <li><strong>Signature Products:</strong> Follow Pharmron’s <strong>direct return policy</strong>. Returns are accepted within <strong>14 days</strong> of delivery, provided the product is unused and in its original packaging.</li>
-                <li><strong>Partner Products:</strong> Are subject to the <strong>manufacturer’s return policy</strong>. Pharmron facilitates the return process to ensure a smooth experience. Please review the specific return policy for each Partner Product at the time of purchase.</li>
-            </ul>
-            <p>Pharmron is not liable for any indirect, incidental, or consequential damages arising from the use or inability to use our products or services.</p>
-        </section>
-
-        <section>
-            <h3>6. Intellectual Property</h3>
-            <p>All content on Pharmron.com.ng, including text, images, logos, and trademarks, is the property of Pharmron or its licensors and is protected by intellectual property laws. You may not reproduce, distribute, or use any content without our prior written consent.</p>
-        </section>
-
-        <section>
-            <h3>7. Prohibited Activities</h3>
-            <p>By using Pharmron.com.ng, you agree not to:</p>
-            <ul>
-                <li>Engage in any fraudulent or illegal activities.</li>
-                <li>Violate any applicable laws or regulations.</li>
-                <li>Infringe on the rights of others, including intellectual property rights.</li>
-                <li>Interfere with the security or functionality of our website.</li>
-            </ul>
-        </section>
-
-        <section>
-            <h3>8. Termination</h3>
-            <p>Pharmron reserves the right to terminate or suspend your account and access to our website at our sole discretion, without notice, for conduct that we believe violates these Terms or is harmful to other users or our business.</p>
-        </section>
-
-        <section>
-            <h3>9. Governing Law</h3>
-            <p>These Terms are governed by and construed in accordance with the laws of the <strong>Federal Republic of Nigeria</strong>. Any disputes arising from these Terms or your use of Pharmron.com.ng shall be resolved in the courts of Nigeria.</p>
-        </section>
-
-        <section>
-            <h3>10. Changes to These Terms</h3>
-            <p>Pharmron may update these Terms from time to time. We will notify you of any changes by posting the updated Terms on our website. Your continued use of Pharmron.com.ng after such changes constitutes your acceptance of the new Terms.</p>
-        </section>
-
-        <section>
-            <h3>11. Contact Us</h3>
-            <p>If you have any questions or concerns about these Terms, please contact us at:</p>
-            <p><strong>Email:</strong> support@pharmron.com.ng</p>
-        </section>
+        <div class="mt-12">
+            <a href="/" class="inline-flex items-center gap-1.5 text-sm text-obsidian-500 transition hover:text-gold">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"/></svg>
+                Back to Home
+            </a>
+        </div>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Pharmron Nutraceuticals</h3>
-                <p>Your partner in health and wellness.</p>
-            </div>
-
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <a href="../index.html">Home</a>
-                <a href="#">Products</a>
-                <a href="#">About Us</a>
-                <a href="../contact.html">Contact</a>
-                <a href="terms-of-service.html">Terms of Service</a>
-                <a href="privacy-policy.html">Privacy Policy</a>
-            </div>
-
-            <div class="footer-section">
-                <h3>Newsletter</h3>
-                <p>Subscribe to our newsletter for updates and offers.</p>
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Your Email" required>
-                    <button type="submit">Subscribe</button>
-                </form>
-            </div>
+    <footer class="border-t border-gold/10 bg-obsidian-950">
+        <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+            <p class="text-center text-sm text-obsidian-500">&copy; 2026 Pharmron Natriceuticals. All rights reserved.</p>
         </div>
-        <p>&copy; 2024 Pharmron Nutraceuticals. All rights reserved.</p>
     </footer>
 </body>
 </html>

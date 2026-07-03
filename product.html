@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product — Pharmron Natriceuticals</title>
+    <meta name="description" content="View product details for Pharmron Natriceuticals.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: { 50: '#fdf8e8', 100: '#f9edc5', 200: '#f3db8a', 300: '#edc94f', 400: '#e0b832', 500: '#d4af37', 600: '#b8962a', 700: '#96741f', 800: '#755a18', 900: '#5c4713' },
+                        'gold': '#d4af37', 'gold-light': '#f3db8a', 'gold-dark': '#96741f',
+                        obsidian: { 50: '#f5f5f5', 100: '#e6e6e6', 200: '#cccccc', 300: '#a3a3a3', 400: '#808080', 500: '#666666', 600: '#4d4d4d', 700: '#333333', 800: '#1a1a1a', 900: '#0d0d0d', 950: '#050505' }
+                    },
+                    fontFamily: { sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-obsidian-950 text-obsidian-100 antialiased">
+
+    <!-- ===== HEADER ===== -->
+    <header class="sticky top-0 z-50 border-b border-gold/20 bg-obsidian-950/95 backdrop-blur-sm">
+        <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+            <a href="/" class="flex items-center gap-4">
+                <img src="images/pharmronlogo.png" alt="Pharmron" class="h-14 w-auto sm:h-16">
+                <div class="hidden sm:block">
+                    <span class="text-2xl font-extrabold tracking-tight text-gold">Pharmron</span>
+                    <span class="block text-xs font-medium uppercase tracking-[0.15em] text-obsidian-400">Natriceuticals</span>
+                </div>
+            </a>
+            <nav>
+                <ul class="flex items-center gap-5 text-sm font-semibold text-obsidian-300 sm:gap-8">
+                    <li><a href="/" class="transition hover:text-gold">Home</a></li>
+                    <li><a href="/#products" class="transition hover:text-gold">Products</a></li>
+                    <li><a href="legal/privacy-policy.html" class="transition hover:text-gold">Privacy</a></li>
+                    <li><a href="legal/terms-of-service.html" class="transition hover:text-gold">Terms</a></li>
+                    <li>
+                        <a href="cart.html" class="relative flex items-center gap-1.5 rounded-xl border border-gold/30 bg-gold/10 px-4 py-2 text-gold transition hover:bg-gold/20">
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
+                            <span>Cart</span>
+                            <span id="cart-count" class="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-gold text-[10px] font-bold text-obsidian-950">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+            <div id="product-detail">
+                <!-- Dynamically populated by script.js -->
+                <div class="flex items-center justify-center py-20">
+                    <div class="flex items-center gap-3 text-obsidian-400">
+                        <svg class="h-6 w-6 animate-spin" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182"/></svg>
+                        <span>Loading product...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="border-t border-gold/10 bg-obsidian-950">
+        <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+            <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
+                <p class="text-sm text-obsidian-500">&copy; 2026 Pharmron Natriceuticals. All rights reserved.</p>
+                <div class="flex gap-6 text-sm text-obsidian-500">
+                    <a href="legal/privacy-policy.html" class="transition hover:text-gold">Privacy</a>
+                    <a href="legal/terms-of-service.html" class="transition hover:text-gold">Terms</a>
+                    <a href="contact.html" class="transition hover:text-gold">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
