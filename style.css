@@ -49,12 +49,110 @@
     overflow: hidden;
     transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
 }
 
 .product-card:hover {
     border-color: #d4af37;
     box-shadow: 0 0 30px rgba(212, 175, 55, 0.1);
     transform: translateY(-2px);
+}
+
+/* Product card actions — always a single straight row */
+.product-actions {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 1rem;
+}
+
+.product-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    padding: 0.375rem 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    line-height: 1;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+.action-details {
+    border: 1px solid #333333;
+    background-color: #1a1a1a;
+    color: #cccccc;
+}
+
+.action-details:hover {
+    border-color: rgba(212, 175, 55, 0.4);
+    color: #d4af37;
+}
+
+.action-whatsapp {
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    background-color: rgba(6, 78, 59, 0.3);
+    color: #6ee7b7;
+}
+
+.action-whatsapp:hover {
+    background-color: rgba(6, 78, 59, 0.5);
+}
+
+.action-cart {
+    background-color: rgba(212, 175, 55, 0.9);
+    color: #050505;
+    font-weight: 700;
+}
+
+.action-cart:hover {
+    background-color: #d4af37;
+}
+
+.product-action-btn:active {
+    transform: scale(0.97);
+}
+
+/* Product type badge (Signature / Partner) — absolute overlay on card image */
+.product-image-wrap .product-type-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+}
+
+.product-type-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.625rem;
+    border-radius: 9999px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    pointer-events: none;
+}
+
+.badge-signature {
+    background: linear-gradient(135deg, #d4af37, #b8962a);
+    color: #050505;
+    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.4);
+}
+
+.badge-partner {
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
 }
 
 /* Product card image container */
@@ -165,6 +263,7 @@ html {
 .qty-input::-webkit-inner-spin-button,
 .qty-input::-webkit-outer-spin-button {
     -webkit-appearance: none;
+    appearance: none;
     margin: 0;
 }
 

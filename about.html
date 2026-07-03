@@ -4,63 +4,127 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - Pharmron Natriceuticals</title>
-    <link rel="stylesheet" href="/styles/main.css">
+    <meta name="description" content="Learn about Pharmron Natriceuticals — GTIN-verified health and wellness products, personally vetted by founder Pharm. Ronald.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: { 50: '#fdf8e8', 100: '#f9edc5', 200: '#f3db8a', 300: '#edc94f', 400: '#e0b832', 500: '#d4af37', 600: '#b8962a', 700: '#96741f', 800: '#755a18', 900: '#5c4713' },
+                        'gold': '#d4af37', 'gold-light': '#f3db8a', 'gold-dark': '#96741f',
+                        obsidian: { 50: '#f5f5f5', 100: '#e6e6e6', 200: '#cccccc', 300: '#a3a3a3', 400: '#808080', 500: '#666666', 600: '#4d4d4d', 700: '#333333', 800: '#1a1a1a', 900: '#0d0d0d', 950: '#050505' }
+                    },
+                    fontFamily: { sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <header>
-        <div class="container">
-            <h1>Pharmron Natriceuticals</h1>
-            <nav>
-                <ul>
-                    <li><a href="/index.html">Home</a></li>
-                    <li><a href="/index.html#products">Products</a></li>
-                    <li><a href="/about.html">About Us</a></li>
-                    <li><a href="/contact.html">Contact</a></li>
-                    <li><a href="/terms.html">Terms of Service</a></li>
-                    <li><a href="/privacy.html">Privacy Policy</a></li>
-                </ul>
-            </nav>
+<body class="bg-obsidian-950 text-obsidian-100 antialiased">
+
+    <!-- ===== HEADER / NAV (identical to index.html) ===== -->
+    <header class="sticky top-0 z-50 border-b border-gold/20 bg-obsidian-950/95 backdrop-blur-sm">
+        <div class="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <a href="/" class="flex items-center gap-3">
+                    <img src="/images/pharmronlogo.png" alt="Pharmron" class="h-[102px] w-auto sm:h-32">
+                    <div>
+                        <p class="text-[40px] font-semibold uppercase tracking-[0.3em] text-gold">Pharmron</p>
+                        <p class="text-[30px] uppercase tracking-[0.4em] text-obsidian-400">Natriceuticals</p>
+                    </div>
+                </a>
+                <nav>
+                    <ul class="flex flex-wrap items-center gap-4 text-sm font-semibold text-obsidian-300">
+                        <li><a href="/" class="transition hover:text-gold">Home</a></li>
+                        <li><a href="/#products" class="transition hover:text-gold">Products</a></li>
+                        <li><a href="/about.html" class="transition hover:text-gold">About</a></li>
+                        <li><a href="/legal/privacy-policy.html" class="transition hover:text-gold hidden sm:inline">Privacy</a></li>
+                        <li><a href="/legal/terms-of-service.html" class="transition hover:text-gold hidden sm:inline">Terms</a></li>
+                        <li><a href="/cart.html" class="rounded-full border border-gold/30 bg-gold/10 px-4 py-2 text-gold transition hover:bg-gold/20">Cart</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </header>
-    
-    <main class="container">
-        <section class="about-section">
-            <h2>About Us</h2>
-            <p>
-                Pharmron Natriceuticals is dedicated to providing high-quality health and wellness products that are personally verified for effectiveness and safety. Our mission is to ensure that you have access to products that work, without the guesswork.
-            </p>
-            <p>
-                Every item in our catalog — from our signature Rsplus line to our partner essentials — is GTIN-verified and vetted for real-world results. We believe in transparency, quality, and trust, and we strive to deliver the best to our customers.
-            </p>
+
+    <main>
+        <!-- ===== ABOUT HERO ===== -->
+        <section class="relative overflow-hidden bg-gradient-to-br from-obsidian-950 via-obsidian-900 to-obsidian-950">
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(212,175,55,0.08)_0%,_transparent_60%)]"></div>
+            <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+                <div class="mx-auto max-w-3xl text-center">
+                    <p class="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-gold/70">About Pharmron</p>
+                    <h1 class="text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+                        Health & Wellness,<br>
+                        <span class="text-gold">Built on Trust</span>
+                    </h1>
+                    <p class="mt-6 text-base leading-relaxed text-obsidian-300 sm:text-lg">
+                        Pharmron Natriceuticals is dedicated to providing high-quality health and wellness products that are personally verified for effectiveness and safety. Our mission is to ensure that you have access to products that work, without the guesswork.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== ABOUT CONTENT ===== -->
+        <section class="bg-obsidian-950 py-8 sm:py-8 lg:py-14">
+            <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+                <div class="space-y-8 text-base leading-relaxed text-obsidian-300 sm:text-lg">
+                    <p>
+                        Every item in our catalog — from our signature Rsplus line to our partner essentials — is <strong class="text-gold">GTIN-verified</strong> and vetted for real-world results. We believe in transparency, quality, and trust, and we strive to deliver the best to our customers.
+                    </p>
+                    <p>
+                        Founded by <strong class="text-gold">Pharm. Ronald</strong>, Pharmron takes a quality-first approach to health and wellness. As a manufacturer and developer, Ronald personally vets every product listed, ensuring they meet the highest standards of efficacy and safety.
+                    </p>
+                    <p>
+                        We're not just running a store — we're building a community where you can trust what you put in your body. Every product is GTIN-certified, directly sourced from manufacturers, and backed by our personal guarantee.
+                    </p>
+                </div>
+
+                <!-- Trust Strip -->
+                <div class="mt-10 flex flex-wrap justify-center gap-4">
+                    <span class="inline-flex items-center gap-1.5 rounded-full border border-gold/30 bg-gold/10 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-gold">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        GTIN-Verified
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 rounded-full border border-gold/30 bg-gold/10 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-gold">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        Direct from Manufacturer
+                    </span>
+                </div>
+            </div>
         </section>
     </main>
-    
-    <footer>
-        <div class="footer-content container">
-            <div>
-                <h3>Pharmron Natriceuticals</h3>
-                <p>Your trusted source for health and wellness products.</p>
-            </div>
-            <div class="footer-links">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="/index.html">Home</a></li>
-                    <li><a href="/index.html#products">Products</a></li>
-                    <li><a href="/about.html">About Us</a></li>
-                    <li><a href="/contact.html">Contact</a></li>
-                    <li><a href="/terms.html">Terms of Service</a></li>
-                    <li><a href="/privacy.html">Privacy Policy</a></li>
-                </ul>
-            </div>
-            <div class="newsletter">
-                <h3>Newsletter</h3>
-                <p>Subscribe to our newsletter for updates.</p>
-                <form>
-                    <input type="email" placeholder="Your Email" required>
-                    <button type="submit" class="button">Subscribe</button>
-                </form>
+
+    <!-- ===== FOOTER (identical to index.html) ===== -->
+        <footer class="border-t border-gold/10 bg-obsidian-950">
+        <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+            <div class="grid gap-8 md:grid-cols-[1.4fr_1fr] lg:grid-cols-[1.5fr_1fr]">
+                <div class="space-y-4 text-center md:text-left">
+                    <p class="text-sm text-obsidian-500">&copy; 2026 Pharmron Natriceuticals. All rights reserved.</p>
+                    <p class="text-sm text-obsidian-400">Follow us on social media</p>
+                    <div class="flex flex-wrap justify-center gap-3 text-sm text-obsidian-300 md:justify-start">
+                        <a href="https://instagram.com/YOUR_INSTAGRAM_HANDLE" class="transition hover:text-gold" target="_blank" rel="noopener">Instagram</a>
+                        <a href="https://facebook.com/YOUR_FACEBOOK_PAGE" class="transition hover:text-gold" target="_blank" rel="noopener">Facebook</a>
+                        <a href="https://twitter.com/YOUR_TWITTER_HANDLE" class="transition hover:text-gold" target="_blank" rel="noopener">Twitter</a>
+                    </div>
+                </div>
+                <div class="flex flex-wrap items-center justify-center gap-4 text-sm text-obsidian-500 md:justify-end">
+                    <a href="/" class="transition hover:text-gold">Home</a>
+                    <a href="/#products" class="transition hover:text-gold">Products</a>
+                    <a href="/about.html" class="transition hover:text-gold">About</a>
+                    <a href="/contact.html" class="transition hover:text-gold">Contact</a>
+                    <a href="/legal/privacy-policy.html" class="transition hover:text-gold">Privacy</a>
+                    <a href="/legal/terms-of-service.html" class="transition hover:text-gold">Terms</a>
+                </div>
             </div>
         </div>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

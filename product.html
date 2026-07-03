@@ -27,36 +27,33 @@
 </head>
 <body class="bg-obsidian-950 text-obsidian-100 antialiased">
 
-    <!-- ===== HEADER ===== -->
+    <!-- ===== HEADER / NAV (identical to index.html) ===== -->
     <header class="sticky top-0 z-50 border-b border-gold/20 bg-obsidian-950/95 backdrop-blur-sm">
-        <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-            <a href="/" class="flex items-center gap-4">
-                <img src="images/pharmronlogo.png" alt="Pharmron" class="h-14 w-auto sm:h-16">
-                <div class="hidden sm:block">
-                    <span class="text-2xl font-extrabold tracking-tight text-gold">Pharmron</span>
-                    <span class="block text-xs font-medium uppercase tracking-[0.15em] text-obsidian-400">Natriceuticals</span>
-                </div>
-            </a>
-            <nav>
-                <ul class="flex items-center gap-5 text-sm font-semibold text-obsidian-300 sm:gap-8">
-                    <li><a href="/" class="transition hover:text-gold">Home</a></li>
-                    <li><a href="/#products" class="transition hover:text-gold">Products</a></li>
-                    <li><a href="legal/privacy-policy.html" class="transition hover:text-gold">Privacy</a></li>
-                    <li><a href="legal/terms-of-service.html" class="transition hover:text-gold">Terms</a></li>
-                    <li>
-                        <a href="cart.html" class="relative flex items-center gap-1.5 rounded-xl border border-gold/30 bg-gold/10 px-4 py-2 text-gold transition hover:bg-gold/20">
-                            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
-                            <span>Cart</span>
-                            <span id="cart-count" class="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-gold text-[10px] font-bold text-obsidian-950">0</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+        <div class="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <a href="/" class="flex items-center gap-3">
+                    <img src="/images/pharmronlogo.png" alt="Pharmron" class="h-[102px] w-auto sm:h-32">
+                    <div>
+                        <p class="text-[40px] font-semibold uppercase tracking-[0.3em] text-gold">Pharmron</p>
+                        <p class="text-[30px] uppercase tracking-[0.4em] text-obsidian-400">Natriceuticals</p>
+                    </div>
+                </a>
+                <nav>
+                    <ul class="flex flex-wrap items-center gap-4 text-sm font-semibold text-obsidian-300">
+                        <li><a href="/" class="transition hover:text-gold">Home</a></li>
+                        <li><a href="/#products" class="transition hover:text-gold">Products</a></li>
+                        <li><a href="/about.html" class="transition hover:text-gold">About</a></li>
+                        <li><a href="/legal/privacy-policy.html" class="transition hover:text-gold hidden sm:inline">Privacy</a></li>
+                        <li><a href="/legal/terms-of-service.html" class="transition hover:text-gold hidden sm:inline">Terms</a></li>
+                        <li><a href="/cart.html" class="rounded-full border border-gold/30 bg-gold/10 px-4 py-2 text-gold transition hover:bg-gold/20">Cart</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </header>
 
     <main>
-        <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+        <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-14">
             <div id="product-detail">
                 <!-- Dynamically populated by script.js -->
                 <div class="flex items-center justify-center py-20">
@@ -70,14 +67,25 @@
     </main>
 
     <!-- ===== FOOTER ===== -->
-    <footer class="border-t border-gold/10 bg-obsidian-950">
-        <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-            <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
-                <p class="text-sm text-obsidian-500">&copy; 2026 Pharmron Natriceuticals. All rights reserved.</p>
-                <div class="flex gap-6 text-sm text-obsidian-500">
-                    <a href="legal/privacy-policy.html" class="transition hover:text-gold">Privacy</a>
-                    <a href="legal/terms-of-service.html" class="transition hover:text-gold">Terms</a>
-                    <a href="contact.html" class="transition hover:text-gold">Contact</a>
+        <footer class="border-t border-gold/10 bg-obsidian-950">
+        <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+            <div class="grid gap-8 md:grid-cols-[1.4fr_1fr] lg:grid-cols-[1.5fr_1fr]">
+                <div class="space-y-4 text-center md:text-left">
+                    <p class="text-sm text-obsidian-500">&copy; 2026 Pharmron Natriceuticals. All rights reserved.</p>
+                    <p class="text-sm text-obsidian-400">Follow us on social media</p>
+                    <div class="flex flex-wrap justify-center gap-3 text-sm text-obsidian-300 md:justify-start">
+                        <a href="https://instagram.com/YOUR_INSTAGRAM_HANDLE" class="transition hover:text-gold" target="_blank" rel="noopener">Instagram</a>
+                        <a href="https://facebook.com/YOUR_FACEBOOK_PAGE" class="transition hover:text-gold" target="_blank" rel="noopener">Facebook</a>
+                        <a href="https://twitter.com/YOUR_TWITTER_HANDLE" class="transition hover:text-gold" target="_blank" rel="noopener">Twitter</a>
+                    </div>
+                </div>
+                <div class="flex flex-wrap items-center justify-center gap-4 text-sm text-obsidian-500 md:justify-end">
+                    <a href="/" class="transition hover:text-gold">Home</a>
+                    <a href="/#products" class="transition hover:text-gold">Products</a>
+                    <a href="/about.html" class="transition hover:text-gold">About</a>
+                    <a href="/contact.html" class="transition hover:text-gold">Contact</a>
+                    <a href="/legal/privacy-policy.html" class="transition hover:text-gold">Privacy</a>
+                    <a href="/legal/terms-of-service.html" class="transition hover:text-gold">Terms</a>
                 </div>
             </div>
         </div>
