@@ -1,0 +1,5 @@
+
+> pharmron-ecommerce@1.0.0 dev
+> npx --yes serve .
+
+ INFO  Accepting connections at http://localhost:34501

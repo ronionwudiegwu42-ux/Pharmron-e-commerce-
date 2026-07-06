@@ -1,19 +1,44 @@
 /* ===== Pharmron — Complete Product & Cart Engine ===== */
 
 /* ------------------------------------------------------------------ */
+/*  Shipping Configuration                                               */
+/* ------------------------------------------------------------------ */
+const SHIPPING_OPTIONS = {
+    'lagos': { name: 'Lagos State', fee: 0, description: 'Free shipping for 5+ products' },
+    'other': { name: 'Other Nigerian States', fee: 5000, description: '₦5,000 shipping fee' }
+};
+
+function getShippingFee(cartItems, state) {
+    const totalItems = cartItems.reduce((sum, item) => sum + item.qty, 0);
+    if (state === 'lagos' && totalItems >= 5) {
+        return 0;
+    }
+    return state === 'lagos' ? 2000 : 5000;
+}
+
+function getShippingDescription(state, cartItems) {
+    const totalItems = cartItems.reduce((sum, item) => sum + item.qty, 0);
+    if (state === 'lagos') {
+        return totalItems >= 5 ? 'Free shipping (5+ products)' : '₦2,000 shipping fee';
+    }
+    return '₦5,000 shipping fee';
+}
+
+/* ------------------------------------------------------------------ */
 /*  Shared State                                                       */
 /* ------------------------------------------------------------------ */
 let allProducts = [];
 let cart = JSON.parse(localStorage.getItem('pharmron_cart') || '[]');
 let couponCode = localStorage.getItem('pharmron_coupon') || '';
 const LEAD_MAGNET_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxBBptmtgpjGjYUZfcYXjwgJwBLhfp4WIhv962vdd5Z1hUw6xwdgOiX3od4KUcx1KOHMg/exec';
+const ORDER_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxBBptmtgpjGjYUZfcYXjwgJwBLhfp4WIhv962vdd5Z1hUw6xwdgOiX3od4KUcx1KOHMg/exec';
 
 function saveCoupon() {
     localStorage.setItem('pharmron_coupon', couponCode);
 }
 
 function getDiscountAmount(subtotal) {
-    return couponCode === 'PHARMRON15' ? Math.round(subtotal * 0.15) : 0;
+    return couponCode === 'PHARMRON10' ? Math.round(subtotal * 0.10) : 0;
 }
 
 function saveCart() {
@@ -77,7 +102,10 @@ function fixImagePath(path) {
     path = path.replace(/\.pmg$/i, '.png');
     path = path.replace('Turmeric-capsules', 'Turmeric-capsule');
     if (!path.startsWith('images/')) path = 'images/' + path;
-    return path;
+    // URL-encode spaces in the path for safe HTML src usage
+    let parts = path.split('/');
+    parts[parts.length - 1] = encodeURIComponent(parts[parts.length - 1]);
+    return parts.join('/');
 }
 
 function normalizeHeader(h) {
@@ -287,8 +315,67 @@ function initLeadMagnet() {
 
     const form = section.querySelector('form');
     const successMessage = section.querySelector('#lead-magnet-success');
-    if (!form || !successMessage) return;
+    const couponDisplay = section.querySelector('#coupon-display');
+    const couponModal = document.getElementById('coupon-modal');
+    const closeModalBtn = document.getElementById('close-coupon-modal');
+    const copyCouponBtn = document.getElementById('copy-coupon-btn');
 
+    if (!form || !successMessage || !couponDisplay || !couponModal || !closeModalBtn || !copyCouponBtn) return;
+
+    // Initialize Framer Motion animations
+    const { motion, AnimatePresence } = window.framerMotion || {};
+
+    if (motion) {
+        // Animate the modal
+        motion.div({
+            initial: { opacity: 0, scale: 0.95 },
+            animate: { opacity: 1, scale: 1 },
+            exit: { opacity: 0, scale: 0.95 },
+            transition: { duration: 0.3 }
+        });
+
+        // Animate the coupon code display
+        motion.div({
+            initial: { opacity: 0, y: 20 },
+            animate: { opacity: 1, y: 0 },
+            transition: { delay: 0.2, duration: 0.4 }
+        });
+    }
+
+    // Close modal function
+    const closeModal = () => {
+        couponModal.classList.add('hidden');
+        document.body.style.overflow = '';
+    };
+
+    // Open modal function
+    const openModal = () => {
+        couponModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    };
+
+    // Close modal when clicking the close button
+    closeModalBtn.addEventListener('click', closeModal);
+
+    // Close modal when clicking outside the modal content
+    couponModal.addEventListener('click', (e) => {
+        if (e.target === couponModal) {
+            closeModal();
+        }
+    });
+
+    // Copy coupon code to clipboard
+    copyCouponBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText('PHARMRON10').then(() => {
+            showToast('Coupon code copied to clipboard!');
+            closeModal();
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+            showToast('Failed to copy code. Please try again.');
+        });
+    });
+
+    // Handle form submission
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
         const email = (form.elements['email']?.value || '').trim();
@@ -311,6 +398,16 @@ function initLeadMagnet() {
 
         form.style.display = 'none';
         successMessage.style.display = 'block';
+        couponDisplay.style.display = 'block';
+        couponDisplay.classList.add('animate-modal-in');
+
+        // Save coupon to localStorage
+        localStorage.setItem('pharmron_coupon', 'PHARMRON10');
+
+        // Show the coupon modal with animation
+        setTimeout(() => {
+            openModal();
+        }, 300);
     });
 }
 
@@ -373,20 +470,59 @@ function initProductPage(products) {
                 </div>
                 ` : ''}
 
-                <!-- Actions -->
-                <div class="mt-10 flex flex-nowrap justify-center gap-3">
-                    <button id="detail-add-cart" class="inline-flex items-center gap-2.5 rounded-xl bg-gold px-7 py-3.5 text-sm font-bold text-obsidian-950 shadow-lg shadow-gold/25 transition hover:bg-gold-light active:scale-[0.97]">
-                        <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
-                        Add to Cart
-                    </button>
-                    <a href="${product.paystackLink}" target="_blank" rel="noopener" class="inline-flex items-center gap-2.5 rounded-xl border border-gold/30 bg-obsidian-900 px-7 py-3.5 text-sm font-bold text-gold shadow-sm transition hover:bg-obsidian-800 active:scale-[0.97]">
-                        <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/></svg>
-                        Buy with Card
-                    </a>
-                    <a href="https://wa.me/2348037341221?text=${orderMsg}" target="_blank" rel="noopener" class="inline-flex items-center gap-2.5 rounded-xl border border-emerald-700/40 bg-emerald-900/30 px-7 py-3.5 text-sm font-bold text-emerald-300 transition hover:bg-emerald-900/50 active:scale-[0.97]">
-                        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                        Order on WhatsApp
-                    </a>                </div>
+                <!-- Checkout Section -->
+                <div class="mt-10 rounded-xl border border-gold/20 bg-obsidian-900 p-6">
+                    <h3 class="text-lg font-bold text-white">Checkout Options</h3>
+
+                    <!-- Email Input -->
+                    <div class="mt-4">
+                        <label for="checkout-email" class="mb-2 block text-sm font-medium text-obsidian-300">Email Address</label>
+                        <input id="checkout-email" type="email" required class="w-full rounded-lg border border-obsidian-700 bg-obsidian-950 px-4 py-2.5 text-sm text-white focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="your@email.com">
+                    </div>
+
+                    <!-- Phone Input -->
+                    <div class="mt-4">
+                        <label for="checkout-phone" class="mb-2 block text-sm font-medium text-obsidian-300">Phone Number</label>
+                        <input id="checkout-phone" type="tel" required class="w-full rounded-lg border border-obsidian-700 bg-obsidian-950 px-4 py-2.5 text-sm text-white focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="e.g. 08012345678" pattern="[0-9]{10,15}">
+                        <p id="phone-requirement" class="mt-1 text-xs text-obsidian-400">We need your phone number for order confirmation and delivery updates.</p>
+                    </div>
+
+                    <!-- Shipping Address Input -->
+                    <div class="mt-4">
+                        <label for="checkout-address" class="mb-2 block text-sm font-medium text-obsidian-300">Shipping Address</label>
+                        <textarea id="checkout-address" required class="w-full rounded-lg border border-obsidian-700 bg-obsidian-950 px-4 py-2.5 text-sm text-white focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Enter your full delivery address (street, city, state)" rows="2"></textarea>
+                        <p class="mt-1 text-xs text-obsidian-400">We need your address to deliver your order.</p>
+                    </div>
+
+                    <!-- Shipping Select -->
+                    <div class="mt-4">
+                        <label for="shipping-state" class="mb-2 block text-sm font-medium text-obsidian-300">Shipping Location</label>
+                        <select id="shipping-state" class="w-full rounded-lg border border-obsidian-700 bg-obsidian-950 px-4 py-2.5 text-sm text-white focus:border-gold focus:ring-2 focus:ring-gold/20">
+                            <option value="lagos">Lagos State</option>
+                            <option value="other">Other Nigerian States</option>
+                        </select>
+                        <p id="shipping-description" class="mt-2 text-xs text-obsidian-400">Free shipping for 5+ products in Lagos</p>
+                    </div>
+
+                    <!-- Total Display -->
+                    <div class="mt-6 flex items-center justify-between border-t border-obsidian-700 pt-4">
+                        <span class="text-sm font-medium text-obsidian-300">Total</span>
+                        <span id="product-total" class="text-xl font-bold text-gold">₦${product.priceNum.toLocaleString()}</span>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="mt-6 flex flex-wrap gap-3">
+                        <button id="detail-add-cart" class="flex-1 rounded-xl bg-gold px-5 py-3 text-sm font-bold text-obsidian-950 shadow-lg shadow-gold/25 transition hover:bg-gold-light active:scale-[0.97]">
+                            Add to Cart
+                        </button>
+                        <button id="pay-with-card" class="flex-1 rounded-xl border border-gold/30 bg-obsidian-900 px-5 py-3 text-sm font-bold text-gold shadow-sm transition hover:bg-obsidian-800 active:scale-[0.97]">
+                            Pay with Card
+                        </button>
+                        <a href="https://wa.me/2348037341221?text=${orderMsg}" target="_blank" rel="noopener" class="flex-1 rounded-xl border border-emerald-700/40 bg-emerald-900/30 px-5 py-3 text-center text-sm font-bold text-emerald-300 transition hover:bg-emerald-900/50 active:scale-[0.97]">
+                            Order on WhatsApp
+                        </a>
+                    </div>
+                </div>
 
                 <div class="mt-8">
                     <h3 class="text-sm font-semibold uppercase tracking-[0.2em] text-obsidian-500">Share this product</h3>
@@ -421,7 +557,92 @@ function initProductPage(products) {
     if (twLink) twLink.href = twitterShare;
     if (waLink) waLink.href = whatsappShare;
 
+    // Add event listeners
     document.getElementById('detail-add-cart').addEventListener('click', () => addToCart(product.id));
+
+    // Shipping state change handler
+    const shippingSelect = document.getElementById('shipping-state');
+    const shippingDesc = document.getElementById('shipping-description');
+    const totalDisplay = document.getElementById('product-total');
+
+    function updateShippingDisplay() {
+        const state = shippingSelect.value;
+        const shippingFee = getShippingFee([{id: product.id, qty: 1}], state);
+        const total = calculateTotalWithShipping(product.price, `₦${shippingFee.toLocaleString()}`);
+
+        totalDisplay.textContent = `₦${total.toLocaleString()}`;
+        shippingDesc.textContent = getShippingDescription(state, [{id: product.id, qty: 1}]);
+    }
+
+    if (shippingSelect) {
+        shippingSelect.addEventListener('change', updateShippingDisplay);
+        updateShippingDisplay(); // Initialize
+    }
+
+    // Pay with card handler
+    const payButton = document.getElementById('pay-with-card');
+    const emailInput = document.getElementById('checkout-email');
+    const phoneInput = document.getElementById('checkout-phone');
+    const addressInput = document.getElementById('checkout-address');
+
+    if (payButton && emailInput && phoneInput && addressInput) {
+        payButton.addEventListener('click', () => {
+            const email = emailInput.value.trim();
+            const phoneNumber = phoneInput.value.trim();
+            const address = addressInput.value.trim();
+            
+            if (!email) {
+                showToast('Please enter your email address');
+                return;
+            }
+
+            if (!phoneNumber || phoneNumber.length < 10) {
+                showToast('Please enter a valid phone number (10-15 digits)');
+                return;
+            }
+
+            if (!address) {
+                showToast('Please enter your shipping address');
+                return;
+            }
+
+            const state = shippingSelect.value;
+            const shippingFee = getShippingFee([{id: product.id, qty: 1}], state);
+            const total = calculateTotalWithShipping(product.price, `₦${shippingFee.toLocaleString()}`);
+
+            const metadata = {
+                custom_fields: [
+                    {
+                        display_name: 'Product',
+                        variable_name: 'product',
+                        value: product.name
+                    },
+                    {
+                        display_name: 'Quantity',
+                        variable_name: 'quantity',
+                        value: '1'
+                    },
+                    {
+                        display_name: 'Shipping',
+                        variable_name: 'shipping',
+                        value: state === 'lagos' ? 'Lagos' : 'Other States'
+                    },
+                    {
+                        display_name: 'Phone',
+                        variable_name: 'phone',
+                        value: phoneNumber
+                    },
+                    {
+                        display_name: 'Address',
+                        variable_name: 'address',
+                        value: address
+                    }
+                ]
+            };
+
+            initializePaystackPayment(email, total, metadata);
+        });
+    }
 }
 
 /* ------------------------------------------------------------------ */
@@ -478,8 +699,8 @@ function initCartPage(products) {
 
         const discount = getDiscountAmount(total);
         const finalTotal = total - discount;
-        const couponMessage = couponCode === 'PHARMRON15'
-            ? '<p class="mt-3 text-sm text-emerald-300">Coupon applied: PHARMRON15 — 15% off</p>'
+        const couponMessage = couponCode === 'PHARMRON10'
+            ? '<p class="mt-3 text-sm text-emerald-300">Coupon applied: PHARMRON10 — 10% off</p>'
             : couponCode
                 ? '<p class="mt-3 text-sm text-red-400">Coupon not recognized.</p>'
                 : '';
@@ -510,22 +731,56 @@ function initCartPage(products) {
                     <span class="font-bold text-white">₦${total.toLocaleString()}</span>
                 </div>
                 ${discount ? `<div class="mb-4 flex items-center justify-between text-emerald-300"><span>Discount</span><span>-₦${discount.toLocaleString()}</span></div>` : ``}
-                <div class="mb-6 flex items-center justify-between border-b border-obsidian-700 pb-4">
-                    <span class="text-obsidian-400">Shipping</span>
-                    <span class="text-sm text-obsidian-500">Calculated at checkout</span>
+
+                <!-- Shipping Section -->
+                <div class="mb-6">
+                    <h3 class="mb-3 text-sm font-medium text-obsidian-300">Shipping Information</h3>
+
+                    <!-- Email Input -->
+                    <div class="mb-4">
+                        <label for="checkout-email" class="mb-2 block text-xs font-medium text-obsidian-400">Email Address</label>
+                        <input id="checkout-email" type="email" required class="w-full rounded-lg border border-obsidian-700 bg-obsidian-950 px-3 py-2 text-sm text-white focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="your@email.com">
+                    </div>
+
+                    <!-- Phone Input -->
+                    <div class="mb-4">
+                        <label for="checkout-phone" class="mb-2 block text-xs font-medium text-obsidian-400">Phone Number</label>
+                        <input id="checkout-phone" type="tel" required class="w-full rounded-lg border border-obsidian-700 bg-obsidian-950 px-3 py-2 text-sm text-white focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="e.g. 08012345678" pattern="[0-9]{10,15}">
+                        <p id="phone-requirement" class="mt-1 text-xs text-obsidian-400">We need your phone number for order confirmation and delivery updates.</p>
+                    </div>
+
+                    <!-- Shipping Address Input -->
+                    <div class="mb-4">
+                        <label for="checkout-address" class="mb-2 block text-xs font-medium text-obsidian-400">Shipping Address</label>
+                        <textarea id="checkout-address" required class="w-full rounded-lg border border-obsidian-700 bg-obsidian-950 px-3 py-2 text-sm text-white focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Enter your full delivery address (street, city, state)" rows="2"></textarea>
+                        <p class="mt-1 text-xs text-obsidian-400">We need your address to deliver your order.</p>
+                    </div>
+
+                    <!-- Shipping Select -->
+                    <div>
+                        <label for="shipping-state" class="mb-2 block text-xs font-medium text-obsidian-400">Shipping Location</label>
+                        <select id="shipping-state" class="w-full rounded-lg border border-obsidian-700 bg-obsidian-950 px-3 py-2 text-sm text-white focus:border-gold focus:ring-2 focus:ring-gold/20">
+                            <option value="lagos">Lagos State</option>
+                            <option value="other">Other Nigerian States</option>
+                        </select>
+                        <p id="shipping-description" class="mt-2 text-xs text-obsidian-400">Free shipping for 5+ products in Lagos</p>
+                    </div>
                 </div>
+
                 <div class="mb-8 flex items-center justify-between">
                     <span class="text-lg font-bold text-white">Total</span>
-                    <span class="text-2xl font-black text-gold">₦${finalTotal.toLocaleString()}</span>
+                    <span id="cart-total" class="text-2xl font-black text-gold">₦${finalTotal.toLocaleString()}</span>
                 </div>
+
                 <div class="flex flex-wrap gap-3">
-                    <a href="${(cart.length > 0 && allProducts.find(p => p.id === cart[0].id)) ? allProducts.find(p => p.id === cart[0].id).paystackLink : ''}" target="_blank" rel="noopener" class="flex-1 rounded-xl bg-gold px-6 py-3.5 text-center text-sm font-bold text-obsidian-950 shadow-lg shadow-gold/25 transition hover:bg-gold-light">
-                        Checkout with Card
-                    </a>
+                    <button id="pay-with-card" class="flex-1 rounded-xl bg-gold px-6 py-3.5 text-center text-sm font-bold text-obsidian-950 shadow-lg shadow-gold/25 transition hover:bg-gold-light">
+                        Pay with Card
+                    </button>
                     <a href="${waCheckoutUrl}" target="_blank" rel="noopener" class="flex-1 rounded-xl border border-emerald-700/40 bg-emerald-900/30 px-6 py-3.5 text-center text-sm font-bold text-emerald-300 transition hover:bg-emerald-900/50">
                         Order via WhatsApp
                     </a>
                 </div>
+
                 <div class="mt-4 text-center">
                     <button id="clear-cart" class="text-xs text-obsidian-500 transition hover:text-red-400">Clear Cart</button>
                 </div>
@@ -579,12 +834,229 @@ function initCartPage(products) {
         if (clearBtn) {
             clearBtn.addEventListener('click', () => {
                 cart = [];
-                saveCart(); renderCart();
+                saveCart();
+                renderCart();
+            });
+        }
+
+        // Shipping state change handler
+        const shippingSelect = document.getElementById('shipping-state');
+        const shippingDesc = document.getElementById('shipping-description');
+        const totalDisplay = document.getElementById('cart-total');
+
+        function updateShippingDisplay() {
+            const state = shippingSelect.value;
+            const shippingFee = getShippingFee(cart, state);
+            const subtotal = cart.reduce((sum, item) => {
+                const prod = allProducts.find(p => p.id === item.id);
+                return prod ? sum + (prod.priceNum * item.qty) : sum;
+            }, 0);
+            const discount = getDiscountAmount(subtotal);
+            const total = subtotal - discount + shippingFee;
+
+            totalDisplay.textContent = `₦${total.toLocaleString()}`;
+            shippingDesc.textContent = getShippingDescription(state, cart);
+        }
+
+        if (shippingSelect) {
+            shippingSelect.addEventListener('change', updateShippingDisplay);
+            updateShippingDisplay(); // Initialize
+        }
+
+        // Pay with card handler
+        const payButton = document.getElementById('pay-with-card');
+        const emailInput = document.getElementById('checkout-email');
+        const phoneInput = document.getElementById('checkout-phone');
+        const addressInput = document.getElementById('checkout-address');
+
+        if (payButton && emailInput && phoneInput && addressInput) {
+            payButton.addEventListener('click', () => {
+                const email = emailInput.value.trim();
+                const phoneNumber = phoneInput.value.trim();
+                const address = addressInput.value.trim();
+
+                if (!email) {
+                    showToast('Please enter your email address');
+                    return;
+                }
+
+                if (!phoneNumber || phoneNumber.length < 10) {
+                    showToast('Please enter a valid phone number (10-15 digits)');
+                    return;
+                }
+
+                if (!address) {
+                    showToast('Please enter your shipping address');
+                    return;
+                }
+
+                const state = shippingSelect.value;
+                const shippingFee = getShippingFee(cart, state);
+                const subtotal = cart.reduce((sum, item) => {
+                    const prod = allProducts.find(p => p.id === item.id);
+                    return prod ? sum + (prod.priceNum * item.qty) : sum;
+                }, 0);
+                const discount = getDiscountAmount(subtotal);
+                const total = subtotal - discount + shippingFee;
+
+                const items = cart.map(item => {
+                    const product = allProducts.find(p => p.id === item.id);
+                    return product ? {
+                        product: product.name,
+                        quantity: item.qty,
+                        price: product.price
+                    } : null;
+                }).filter(Boolean);
+
+                const metadata = {
+                    custom_fields: [
+                        {
+                            display_name: 'Items',
+                            variable_name: 'items',
+                            value: JSON.stringify(items)
+                        },
+                        {
+                            display_name: 'Shipping',
+                            variable_name: 'shipping',
+                            value: state === 'lagos' ? 'Lagos' : 'Other States'
+                        },
+                        {
+                            display_name: 'Phone',
+                            variable_name: 'phone',
+                            value: phoneNumber
+                        },
+                        {
+                            display_name: 'Address',
+                            variable_name: 'address',
+                            value: address
+                        }
+                    ]
+                };
+
+                initializePaystackPayment(email, total, metadata);
             });
         }
     }
 
     renderCart();
+}
+/* ------------------------------------------------------------------ */
+/*  Paystack Payment Helpers                                          */
+/* ------------------------------------------------------------------ */
+
+function calculateTotalWithShipping(price, shippingFeeStr) {
+    const priceNum = typeof price === 'number' ? price : parseFloat(String(price).replace(/[^0-9.]/g, '')) || 0;
+    const shippingNum = parseFloat(String(shippingFeeStr).replace(/[^0-9.]/g, '')) || 0;
+    return priceNum + shippingNum;
+}
+
+function initializePaystackPayment(email, totalAmount, metadata) {
+    const paystackPublicKey = 'pk_live_e0b42fdbd927f638715ef3a1df3dbbd26a4b0ddf';
+
+    if (typeof PaystackPop === 'undefined') {
+        showToast('Payment system is loading. Please try again.');
+        return;
+    }
+
+    const handler = PaystackPop.setup({
+        key: paystackPublicKey,
+        email: email,
+        amount: Math.round(totalAmount) * 100, // Paystack expects amount in kobo
+        currency: 'NGN',
+        ref: 'PHARMRON-' + Date.now() + '-' + Math.floor(Math.random() * 1000000),
+        metadata: metadata,
+        callback: function(response) {
+            showToast('✅ Payment successful! Reference: ' + response.reference);
+
+            // Extract order details from metadata for notification
+            const fields = metadata.custom_fields || [];
+            const getField = (name) => {
+                const f = fields.find(cf => cf.variable_name === name);
+                return f ? f.value : '';
+            };
+
+            const phoneNumber = getField('phone');
+            const address = getField('address');
+            const shippingLocation = getField('shipping');
+            const productName = getField('product');
+            const quantity = getField('quantity');
+
+            // Determine items list
+            let items = null;
+            const itemsRaw = getField('items');
+            if (itemsRaw) {
+                try { items = JSON.parse(itemsRaw); } catch(e) { items = null; }
+            }
+
+            if (!items && productName) {
+                items = [{ product: productName, quantity: parseInt(quantity) || 1 }];
+            }
+
+            // Send order notification
+            sendOrderNotification({
+                customer_email: email,
+                phone: phoneNumber,
+                address: address || 'Not provided',
+                shipping_location: shippingLocation || 'Not specified',
+                product_name: productName || 'Multiple items',
+                quantity: quantity || (items ? items.length : 1),
+                product_price: '₦' + Number(totalAmount).toLocaleString(),
+                amount: totalAmount,
+                items: items,
+                reference: response.reference
+            });
+
+            // Clear cart on successful payment
+            cart = [];
+            saveCart();
+            // Reload cart page if on cart page
+            const cartContainer = document.getElementById('cart-page');
+            if (cartContainer && typeof initCartPage === 'function') {
+                initCartPage(allProducts);
+            }
+        },
+        onClose: function() {
+            showToast('Payment window closed.');
+        }
+    });
+
+    handler.openIframe();
+}
+
+/* ------------------------------------------------------------------ */
+/*  Order Notification Webhook                                         */
+/* ------------------------------------------------------------------ */
+
+async function sendOrderNotification(orderData) {
+    if (!ORDER_WEBHOOK_URL) {
+        console.warn('ORDER_WEBHOOK_URL not configured — skipping notification');
+        return;
+    }
+
+    try {
+        const response = await fetch(ORDER_WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                customer_email: orderData.customer_email,
+                phone: orderData.phone,
+                address: orderData.address,
+                shipping_location: orderData.shipping_location,
+                product_name: orderData.product_name,
+                quantity: orderData.quantity,
+                product_price: orderData.product_price,
+                amount: orderData.amount,
+                items: orderData.items,
+                reference: orderData.reference,
+                timestamp: new Date().toISOString()
+            })
+        });
+
+        const result = await response.json();
+        console.log('Order notification sent:', result);
+    } catch (error) {
+        console.error('Failed to send order notification:', error);
+    }
 }
 
 /* ------------------------------------------------------------------ */
@@ -604,6 +1076,18 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (isHome) { initHomePage(allProducts); initLeadMagnet(); }
         if (isProduct) initProductPage(allProducts);
         if (isCart) initCartPage(allProducts);
+
+        // Dispatch event for carousel initialization
+        if (isHome) {
+            // Dispatch custom event with products data
+            const event = new CustomEvent('pharmron:products-loaded', {
+                detail: { products: allProducts }
+            });
+            document.dispatchEvent(event);
+
+            // Also set global for fallback
+            window.__pharmronProducts = allProducts;
+        }
 
     } catch (error) {
         console.error('Pharmron: Init error', error);
