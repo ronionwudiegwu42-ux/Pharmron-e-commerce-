@@ -4,7 +4,8 @@
   "main": "script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npx --yes serve ."
+    "dev": "npx --yes serve .",
+    "build:css": "npx tailwindcss -i ./src/styles/input.css -o ./style.css"
   },
   "keywords": [],
   "author": "",
@@ -14,8 +15,9 @@
     "motion": "^12.42.2"
   },
   "devDependencies": {
+    "@tailwindcss/cli": "^4.0.0",
     "autoprefixer": "^10.5.2",
     "postcss": "^8.5.16",
-    "tailwindcss": "^4.3.2"
+    "tailwindcss": "^4.0.0"
   }
 }

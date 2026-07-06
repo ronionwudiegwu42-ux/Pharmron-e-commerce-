@@ -32,10 +32,11 @@ const IS_LOCALHOST = window.location.hostname === 'localhost' ||
                      window.location.port === '3000' ||
                      window.location.hostname === '';
 
-// Use .env values if available, otherwise fallback to production URLs
+// Safety fallback for API_BASE if config.js fails to load
+const apiURL = typeof API_BASE !== 'undefined' ? API_BASE : 'https://pharmron.com.ng';
 const PAYSTACK_PUBLIC_KEY = (IS_LOCALHOST ? 'pk_test_' : 'pk_live_') + 'e0b42fdbd927f638715ef3a1df3dbbd26a4b0ddf';
-const LEAD_MAGNET_WEBHOOK_URL = API_BASE + '/api/lead-magnet';
-const ORDER_WEBHOOK_URL = API_BASE + '/api/order';
+const LEAD_MAGNET_WEBHOOK_URL = apiURL + '/api/lead-magnet';
+const ORDER_WEBHOOK_URL = apiURL + '/api/order';
 
 /* ------------------------------------------------------------------ */
 /*  Shared State                                                       */
