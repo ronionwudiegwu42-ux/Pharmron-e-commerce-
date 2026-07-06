@@ -439,6 +439,55 @@ function initProductPage(products) {
         return;
     }
 
+    // Inject JSON-LD Product Schema for SEO
+    injectProductSchema(product);
+    
+    function injectProductSchema(product) {
+        // Remove existing schema if present
+        const existingSchema = document.getElementById('product-jsonld');
+        if (existingSchema) existingSchema.remove();
+
+        const schema = {
+            "@context": "https://schema.org/",
+            "@type": "Product",
+            "name": product.name,
+            "description": product.problem ? product.problem.substring(0, 5000) : product.name + ' - Premium quality product from Pharmron Natriceuticals',
+            "image": product.imagePath,
+            "brand": {
+                "@type": "Brand",
+                "name": "Pharmron Natriceuticals"
+            },
+            "category": product.category,
+            "offers": {
+                "@type": "Offer",
+                "price": product.priceNum,
+                "priceCurrency": "NGN",
+                "availability": "https://schema.org/InStock",
+                "seller": {
+                    "@type": "Organization",
+                    "name": "Pharmron Natriceuticals"
+                }
+            }
+        };
+
+        // Add GTIN (Global Trade Item Number) if available
+        if (product.gtin) {
+            schema.gtin = product.gtin;
+            schema.sku = product.id;
+        }
+
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.id = 'product-jsonld';
+        script.textContent = JSON.stringify(schema, null, 2);
+        
+        // Inject into head for better SEO processing
+        const head = document.head;
+        if (head) {
+            head.appendChild(script);
+        }
+    }
+
     const orderMsg = encodeURIComponent(product.whatsappMessage || `I will like to get ${product.name}`);
 
     container.innerHTML = `
