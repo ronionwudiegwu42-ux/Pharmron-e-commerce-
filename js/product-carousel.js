@@ -269,19 +269,19 @@
             startAutoplay();
         }
 
-    // Expose controls for debugging and re-initialization
-    container._carousel = {
-        goTo: goToSlide,
-        next: nextSlide,
-        prev: prevSlide,
-        currentIndex: () => currentIndex,
-        reinit: (newProducts) => {
-            // Stop autoplay and clean up
-            stopAutoplay();
-            // Re-initialize with new products
-            initCarousel(newProducts);
-        }
-    };
+        // Expose controls for debugging and re-initialization
+        container._carousel = {
+            goTo: goToSlide,
+            next: nextSlide,
+            prev: prevSlide,
+            currentIndex: () => currentIndex,
+            reinit: (newProducts) => {
+                // Stop autoplay and clean up
+                stopAutoplay();
+                // Re-initialize with new products
+                initCarousel(newProducts);
+            }
+        };
     }
 
     // --- Hook into main init ---
