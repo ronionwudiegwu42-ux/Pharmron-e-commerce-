@@ -25,13 +25,24 @@ function getShippingDescription(state, cartItems) {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Environment Detection & Configuration                               */
+/* ------------------------------------------------------------------ */
+const IS_LOCALHOST = window.location.hostname === 'localhost' || 
+                     window.location.hostname === '127.0.0.1' ||
+                     window.location.port === '3000' ||
+                     window.location.hostname === '';
+
+// Use .env values if available, otherwise fallback to production URLs
+const PAYSTACK_PUBLIC_KEY = (IS_LOCALHOST ? 'pk_test_' : 'pk_live_') + 'e0b42fdbd927f638715ef3a1df3dbbd26a4b0ddf';
+const LEAD_MAGNET_WEBHOOK_URL = API_BASE + '/api/lead-magnet';
+const ORDER_WEBHOOK_URL = API_BASE + '/api/order';
+
+/* ------------------------------------------------------------------ */
 /*  Shared State                                                       */
 /* ------------------------------------------------------------------ */
 let allProducts = [];
 let cart = JSON.parse(localStorage.getItem('pharmron_cart') || '[]');
 let couponCode = localStorage.getItem('pharmron_coupon') || '';
-const LEAD_MAGNET_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxBBptmtgpjGjYUZfcYXjwgJwBLhfp4WIhv962vdd5Z1hUw6xwdgOiX3od4KUcx1KOHMg/exec';
-const ORDER_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxBBptmtgpjGjYUZfcYXjwgJwBLhfp4WIhv962vdd5Z1hUw6xwdgOiX3od4KUcx1KOHMg/exec';
 
 function saveCoupon() {
     localStorage.setItem('pharmron_coupon', couponCode);
@@ -951,7 +962,7 @@ function calculateTotalWithShipping(price, shippingFeeStr) {
 }
 
 function initializePaystackPayment(email, totalAmount, metadata) {
-    const paystackPublicKey = 'pk_live_e0b42fdbd927f638715ef3a1df3dbbd26a4b0ddf';
+    const paystackPublicKey = PAYSTACK_PUBLIC_KEY;
 
     if (typeof PaystackPop === 'undefined') {
         showToast('Payment system is loading. Please try again.');

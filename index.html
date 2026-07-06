@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pharmron Natriceuticals — Health & Wellness, Verified</title>
+    <script src="js/config.js"></script>
     <meta name="description" content="Pharmron Natriceuticals: GTIN-verified health and wellness products. Shop curated supplements and skincare.">
     <!-- Tailwind CSS Play CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -29,7 +30,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="icon" type="image/x-icon" href="/images/pharmronlogo.png">
 </head>
 <body class="bg-obsidian-950 text-obsidian-100 antialiased">
 
@@ -69,7 +71,7 @@
                         <div class="relative mx-auto w-64 sm:w-72 lg:w-full lg:max-w-sm">
                             <div class="absolute -inset-1.5 rounded-[2rem] bg-gradient-to-br from-gold/50 to-gold-dark/30 blur-2xl"></div>
                             <div class="relative overflow-hidden rounded-[2rem] border border-gold/20 bg-obsidian-900 shadow-2xl shadow-gold/10">
-                                <img src="images/digital twin.jpg" alt="Founder — Pharmron Natriceuticals" class="w-full object-cover" loading="eager">
+                                <img src="/images/digital twin.jpg" alt="Founder — Pharmron Natriceuticals" class="w-full object-cover" loading="eager">
                             </div>
                             <!-- Trust Badges -->
                             <div class="mt-5 flex flex-wrap justify-center gap-2.5">
@@ -365,10 +367,10 @@
 
     <script src="https://js.paystack.co/v1/inline.js"></script>
     <!-- Framer Motion (standalone DOM build) -->
-    <script src="node_modules/framer-motion/dist/dom.js"></script>
+    <script src="https://unpkg.com/motion@12.42.2/dist/motion.js"></script>
     <!-- Product Carousel -->
-    <script src="js/product-carousel.js"></script>
-    <script src="script.js"></script>
+    <script src="/js/product-carousel.js"></script>
+    <script src="/script.js"></script>
 
     <!-- Coupon Pop-up Modal -->
     <div id="coupon-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm hidden">
