@@ -113,7 +113,17 @@ function fixImagePath(path) {
     if (path.startsWith('http')) return path;
     path = path.replace(/\.pmg$/i, '.png');
     path = path.replace('Turmeric-capsules', 'Turmeric-capsule');
+    // Normalize Image/ or Images/ prefix to images/
+    path = path.replace(/^[Ii]mages?\//, 'images/');
+    // If still no images/ prefix, add it
     if (!path.startsWith('images/')) path = 'images/' + path;
+    // Ensure file has an extension; if not, try .png
+    const filename = path.split('/').pop() || '';
+    if (filename.indexOf('.') === -1) {
+        path = path + '.png';
+    }
+    // Fix known case mismatches between CSV references and actual filenames
+    path = path.replace(/Vitamin\s+B3/i, 'VITAMIN B3');
     // URL-encode spaces in the path for safe HTML src usage
     let parts = path.split('/');
     parts[parts.length - 1] = encodeURIComponent(parts[parts.length - 1]);
@@ -159,7 +169,8 @@ async function fetchProducts() {
             whatsappMessage: raw['Whatapp_text'] || raw['Whatsapp_text'] || '',
             problem: raw['Problem'] || raw['Problem '] || '',
             solution: raw['Solution'] || raw['Solution '] || '',
-            type: cat.toLowerCase().includes('signature') ? 'Signature' : 'Partner'
+            type: cat.toLowerCase().includes('signature') ? 'Signature' : 
+                   cat.toLowerCase().includes('community') ? 'Community Favorite' : 'Partner'
         });
     }
 
@@ -200,7 +211,7 @@ function renderProductCard(product, allProds) {
         <a href="product.html?id=${encodeURIComponent(product.id)}" class="block">
             <div class="product-image-wrap rounded-t-xl">
                 <img src="${product.imagePath}" alt="${product.name}" loading="lazy" onerror="this.src='images/placeholder.png'">
-                <span class="product-type-badge ${product.type === 'Signature' ? 'badge-signature' : 'badge-partner'}">${product.type}</span>
+                <span class="product-type-badge ${product.type === 'Signature' ? 'badge-signature' : product.type === 'Community Favorite' ? 'badge-community-favorite' : 'badge-partner'}">${product.type}</span>
             </div>
         </a>
         <div class="p-4 sm:p-5">
@@ -502,7 +513,7 @@ function initProductPage(products) {
             <div class="lg:w-1/2">
                 <div class="flex flex-wrap items-center gap-2">
                     <span class="category-badge">${product.category}</span>
-                    <span class="product-type-badge ${product.type === 'Signature' ? 'badge-signature' : 'badge-partner'}">${product.type}</span>
+                    <span class="product-type-badge ${product.type === 'Signature' ? 'badge-signature' : product.type === 'Community Favorite' ? 'badge-community-favorite' : 'badge-partner'}">${product.type}</span>
                 </div>
                 <h1 class="mt-4 text-3xl font-black text-white sm:text-4xl lg:text-5xl">${product.name}</h1>
                 <p class="price-tag mt-3 text-3xl">${product.price}</p>

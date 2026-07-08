@@ -12,6 +12,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "jsdom": "^29.1.1",
     "motion": "^12.42.2"
   },
   "devDependencies": {
